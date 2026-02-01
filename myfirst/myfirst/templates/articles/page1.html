@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset='UTF-8'>
+    <title>{{ article.article_title }}</title>
+    <style>
+  
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6; 
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+ 
+        .article-card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 800px;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #0056b3;
+            margin-top: 0;
+            font-size: 32px;
+        }
+
+        .pub-date {
+            color: #888;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .article-content {
+            font-size: 18px;
+            color: #2c3e50;
+            line-height: 1.8;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 30px;
+        }
+
+        /* Комментарии */
+        .comments-header {
+            margin-top: 30px;
+            color: #333;
+        }
+
+        .comment-item {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #007bff;
+        }
+
+        .comment-author {
+            font-weight: bold;
+            color: #0056b3;
+        }
+
+        /* Форма комментария */
+        .comment-form {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+ 
+        button {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px; 
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            margin-top: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="article-card">
+        <h1>{{ article.article_title }}</h1>
+        <span class="pub-date">Дата публикации: {{ article.pub_date }}</span>
+        
+        {% if article.was_published_recently %}
+            <b style="color: red;">НОВАЯ СТАТЬЯ</b>
+        {% endif %}
+
+        <div class="article-content">
+            {{ article.article_text }}
+        </div>
+
+        <h3 class="comments-header">Комментарии</h3>
+        {% if latest_comments_list %}
+            {% for c in latest_comments_list %}
+                <div class="comment-item">
+                    <span class="comment-author">{{ c.author_name }}</span>
+                    <p style="margin: 5px 0 0 0;">{{ c.comment_text }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p style="color: #888;">Комментариев пока нет. Будьте первым!</p>
+        {% endif %}
+    </div>
+
+    <div class="comment-form">
+        <h3>Оставить комментарий</h3>
+        <form action="{% url 'articles:leave_comment' article.id %}" method="POST">
+            {% csrf_token %}
+            <input type="text" required placeholder="Ваше имя" name="name">
+            <textarea name="text" required placeholder="Напишите, что вы думаете..." rows="4"></textarea>
+            <button type="submit">Отправить комментарий</button>
+        </form>
+    </div>
+
+    <a href="/" class="back-btn">← Назад к списку статей</a>
+
+</body>
+</html>

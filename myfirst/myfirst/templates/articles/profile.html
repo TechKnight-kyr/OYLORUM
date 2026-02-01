@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% block title %}Профиль | {{ user.username }}{% endblock %}
+
+{% block content %}
+<style>
+    :root {
+        --primary-color: #007bff;
+        --danger-color: #ff4757;
+        --bg-color: #f4f7f6;
+        --text-dark: #2d3436;
+    }
+
+    .profile-wrapper {
+        max-width: 800px;
+        margin: 100px auto 50px;
+        padding: 0 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Карточка пользователя */
+    .user-card {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        margin-bottom: 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .user-card::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; height: 5px;
+        background: linear-gradient(90deg, var(--primary-color), #6c5ce7);
+    }
+
+    .user-avatar {
+        width: 80px;
+        height: 80px;
+        background: var(--bg-color);
+        color: var(--primary-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        font-weight: bold;
+        margin: 0 auto 15px;
+        border: 2px solid #eee;
+    }
+
+    .user-card h1 {
+        margin: 0;
+        font-size: 28px;
+        color: var(--text-dark);
+    }
+
+    .stats-badge {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 6px 16px;
+        background: #e8f0fe;
+        color: var(--primary-color);
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    /* Список статей */
+    .section-title {
+        font-size: 18px;
+        color: #636e72;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .article-row {
+        background: white;
+        padding: 20px 25px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+    }
+
+    .article-row:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        border-color: #eee;
+    }
+
+    .article-info h3 {
+        margin: 0 0 5px 0;
+        font-size: 18px;
+        color: var(--text-dark);
+    }
+
+    .article-info span {
+        font-size: 13px;
+        color: #b2bec3;
+    }
+
+    /* Кнопки */
+    .btn-delete {
+        background: #fff;
+        color: var(--danger-color);
+        border: 1px solid var(--danger-color);
+        padding: 8px 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .btn-delete:hover {
+        background: var(--danger-color);
+        color: white;
+    }
+
+    .btn-add {
+        background: var(--primary-color);
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    .btn-add:hover { opacity: 0.9; transform: scale(1.05); }
+
+    /* Плавающая кнопка назад */
+    .back-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #2d3436;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        z-index: 100;
+    }
+</style>
+
+<div class="profile-wrapper">
+    <div class="user-card">
+        <div class="user-avatar">
+            {{ user.username|slice:":1"|upper }}
+        </div>
+        <h1>{{ user.username }}</h1>
+        <div class="stats-badge">
+            📄 Публикаций: {{ user_articles.count }}
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>Ваши статьи</span>
+        <a href="{% url 'articles:leave_artc' %}" class="btn-add">+ Новая статья</a>
+    </div>
+
+    {% for a in user_articles %}
+        <div class="article-row">
+            <div class="article-info">
+                <h3>{{ a.article_title }}</h3>
+                <span>Опубликовано: {{ a.pub_date|date:"d M Y" }}</span>
+            </div>
+            
+            <form action="{% url 'articles:delete_article' a.id %}" method="POST" onsubmit="return confirm('Удалить эту статью навсегда?');">
+                {% csrf_token %}
+                <button type="submit" class="btn-delete">Удалить</button>
+            </form>
+        </div>
+    {% empty %}
+        <div style="text-align: center; padding: 50px; color: #b2bec3;">
+            <p>Здесь пока пусто. Пора написать что-нибудь интересное!</p>
+        </div>
+    {% endfor %}
+</div>
+
+<a href="{% url 'articles:begin' %}" class="back-btn">← На главную</a>
+{% endblock %}

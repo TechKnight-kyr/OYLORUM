@@ -1,0 +1,66 @@
+.titart {
+	color: black;
+	font-size: 20px;
+	border: 2px dotted #1E90FF;
+	border-width: 4px;
+	padding: 10px;
+	margin-bottom: 3px;
+	border-radius: 10%;
+	margin-left: 10px;
+}
+
+.texart {
+	font-size: 30px;
+	color: black;
+	border: 2px dotted #1E90FF;
+	border-width: 5px;
+	padding: 10px;
+	margin-bottom: 3px;
+	border-radius: 5%;
+
+}
+
+.button { 
+	color: blue;
+	font-size: 20px;
+	border: 2px dotted #1E90FF;
+	padding: 10px;
+	margin-bottom: 3px;	
+}
+
+.button:hover {
+	color: red;
+	font-size: 25px;
+
+}
+
+.button1 { 
+	color: blue;
+	font-size: 20px;
+	border: 2px dotted #1E90FF;
+	padding: 10px;
+	margin-bottom: 3px;	
+}
+
+.button1:hover {
+	color: red;
+	font-size: 25px;
+	
+}
+
+.title{ 
+	font-size: 50px
+	color: aqua;
+}
+
+.photo{
+	.article-img {
+    width: 100%;          /* Растянуть на всю ширину контейнера */
+    max-width: 800px;     /* Но не шире 800px */
+    height: 400px;        /* Фиксированная высота */
+    object-fit: cover;    /* Умная обрезка: фото не будет сплющенным! */
+    border-radius: 15px;  /* Красивые скругленные углы */
+    display: block;
+    margin: 20px auto;    /* Центрируем саму картинку */
+}
+}

@@ -1,0 +1,47 @@
+.button {
+	color:blue;
+	font-size: 30px;
+	border: 90px;
+	border-radius: 15px;
+}
+
+.button:hover {
+	color:red;
+	text-decoration: unset;
+	font-size: 33px;
+}
+
+.article_text {
+	font-size: 30px;
+	color: red;
+	border: 2px dotted #1E90FF;
+	padding: 10px;
+	margin-bottom: 3px;
+	border-radius: 15px;
+	border-color: red;
+	background-color: aqua;
+}
+.all {
+	background-color: black;
+	margin: 50px;
+	margin-top: 0px;
+}
+
+.titext {
+	border: 2px double #1E90FF;
+	padding: 10px;
+	margin-bottom: 3px;
+	border-radius: 50px;
+	border-width: 12px;	
+}
+
+.buttonadd {
+	color: blue;
+	font-size: 50px;
+}
+
+.buttonadd:hover{
+	color: red;
+	text-decoration: unset;
+	font-size: 55px;	
+}

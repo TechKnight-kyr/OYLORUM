@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Ойлорум - Добавить статью</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+        }
+
+    
+        .title-bar {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+    
+        .form-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+    
+        .header-row {
+            display: flex;
+            align-items: center;
+            gap: 15px; 
+            margin-bottom: 15px;
+        }
+
+        .titart {
+            flex: 2; 
+            padding: 10px;
+            border: 3px solid lightblue;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .photo-upload {
+            flex: 1; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            border: 3px solid lightblue;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .texart {
+            width: 100%;
+            box-sizing: border-box;
+            border: 5px solid lightblue;
+            border-radius: 5px;
+            padding: 15px;
+            font-size: 16px;
+            resize: vertical; 
+        }
+
+ 
+        .footer-row {
+            display: flex;
+            justify-content: space-between ;
+            margin-top: 15px;
+        }
+
+        .button-save {
+            padding: 6px 30px;
+            height: 40px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .button-save:hover {
+            background-color: #218838;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #007bff;
+ 
+            margin-bottom: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="title-bar">
+    <h1 style="margin: 0;">Билим - "Ой жана билимин менен бөлүш"</h1>
+</div>
+
+<div class="form-container">
+    <form action="{% url 'articles:leave_artc' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="header-row">
+            <input class="titart" type="text" required placeholder="Название статьи" name="art_title">
+            
+            <div class="photo-upload">
+                <label style="color: #2c3e50; font-weight: bold; white-space: nowrap;">Фото:</label>
+                <input type="file" name="image_file">
+            </div>
+        </div>
+
+        <textarea class="texart" name="art_text" required placeholder="Текст статьи" rows="25"></textarea>
+
+        <div class="footer-row">
+            <a href="/" class="back-link">← Вернуться назад</a>
+            <button class="button-save" type="submit">Опубликовать статью</button>
+        </div>
+    </form>
+
+    
+</div>
+
+</body>
+</html>

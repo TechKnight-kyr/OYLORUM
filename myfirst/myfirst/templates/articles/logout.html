@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang-en>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all" />
+	<title>Ойлорум</title>
+
+<body class="all">
+<style>
+/* Контейнер для всех статей */
+.articles-feed {
+    display: flex;
+    flex-direction: column; /* Элементы будут идти один под другим */
+    align-items: center;    /* Центрируем статьи по горизонтали */
+    margin-top: 100px;      /* Отступ от синей полосы сверху */
+    gap: 40px;              /* Расстояние между статьями */
+    background-color: white;
+    padding: 20px;
+}
+
+/* Стиль одной конкретной статьи */
+.article-item {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;    /* Скругляем углы карточки статьи */
+    width: 70%;             /* Ширина статьи, чтобы не была на весь экран */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Легкая тень для объема */
+}
+
+.article-item h2 {
+    margin-bottom: 10px;    /* Отступ заголовка от текста */
+}
+
+.article_text {
+    color: #2c3e50;
+    line-height: 1.5;       /* Межстрочный интервал */
+    margin-bottom: 10px;
+}
+
+.pub-date {
+    font-size: 13px;
+    color: #7f8c8d;
+}
+	.title{
+		display:flex;
+		justify-content: center;
+		margin-top:17px;
+		margin-right: 5px;
+		background-color: #002a55;
+		color: white;
+	}
+	.authoris{
+		display: flex;         /* Включает режим выравнивания */
+		align-items: center;
+		position: relative;
+		left: 0;
+		align-content: center;
+		margin-top: -20px !important;
+		margin-left:1220px;
+		font-size: 16px;
+	    color: white;
+	    text-decoration: none;
+	    font-size: 18px;
+	    font-weight: 600;
+	    font-color: white;
+	    justify-content: space-between;
+	    gap: 20px;
+	}
+	.header{
+
+			margin-top: 0px;
+			height: 60px;
+			position: absolute;
+			top: 0;
+			right: 0;
+			
+			gap: 5px;
+		    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+		    width: 100%;
+		    top:0;
+		    right: 0;
+		    
+	}
+	.fonts{
+		background-color: white ;
+		color: #2c3e50;
+		cursor: pointer;
+		padding: 5px 20px;
+		border: none;
+		border-radius: 10px;
+		margin: auto;
+		margin-top: 25px;
+		margin-left: 1150px;
+	}
+
+	.addart{
+		position: relative;
+		margin-left: 15px;
+		display: inline-block;
+		padding: 4px 20px;
+		margin-top: 10px !important;
+		border: none;
+		border-radius: 10px;
+		background-color: white;
+		color: black ;
+		font-color: black;
+
+	}
+
+</style>
+	<div class="articles-feed">
+	    {% for a in articles_list %}
+	        <div class="article-item">
+	            <h2><a class="button" href="{% url 'articles:detail' a.id %}">{{a.article_title}}</a></h2>
+	            <p class="article_text">{{a.article_text}}</p>
+	            <span class="pub-date">{{a.pub_date}}</span>
+	        </div>
+	    {% endfor %}
+	</div>
+
+<div class="header">
+        <a href="{% url 'articles:login' %}" class="fonts">Логин</a>
+        <a href="{% url 'articles:registration' %}" class="fonts">Регистрация</a>
+    {% endif %}
+</div>
+
+</div>
+</body>
+
+

@@ -1,0 +1,43 @@
+.container {
+	border: 5px outset;
+	border-color: red;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-right: 900px;
+	margin-left: 650px;
+	margin-top: 150px;
+	border-h
+}
+.small-mb-1{
+	font-size: 25px;
+
+}
+.inputs {
+	font-size: 25px;
+}
+.card-header{
+	font-size: 20px;
+}
+.registr {
+	font-size:25px;
+}
+
+.createacc{
+	font-size: 25px;
+	color: black;
+	background-color: white; 
+}
+.createacc:hover{
+	color: red;
+	font-size: 30;
+
+}
+
+.firstname {
+	border-width: 5px;
+	padding-top: 20px;
+
+
+}

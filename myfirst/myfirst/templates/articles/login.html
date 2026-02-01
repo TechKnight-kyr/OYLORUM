@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang-en>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	
+	<title>Inarts</title>
+
+<style>
+	.small-mb-1{
+		
+	}
+	.card {
+	    background-color: #ffffff; /* Чистый белый цвет */
+	    padding: 10px;             /* Внутренние отступы, чтобы было красиво */
+	    border-radius: 15px;       /* Скругление углов, как в современных сайтах */
+	    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Легкая тень, чтобы блок выделялся */
+}
+	.container{
+	    display: flex;           /* Включаем гибкий контейнер */
+	    justify-content: center; /* Центрируем по горизонтали */
+	    align-items: center;     /* Центрируем по вертикали */
+	    min-height: 100vh;       /* Важно! Заставляем контейнер растянуться на всю высоту экрана */
+	    margin: 0;               /* Убираем стандартные отступы браузера */
+	}
+	.button{
+	    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); /* Очень нежный светло-синий градиент */
+	    padding: 10px;            /* Пространство внутри синего фона вокруг кнопок */
+	    margin-top: 10px;         /* Отступ от полей ввода сверху */
+	    border-radius: 8px;      /* Скругленные углы у самого фона */
+	    display: flex;            /* Чтобы кнопки внутри красиво встали */
+	    justify-content: center;  /* Центрируем кнопки внутри фона */
+	    border: 1px solid #90caf9; /* Тонкая синяя рамка, чтобы фон был четче */
+
+	}
+	.button1 {
+	    background: linear-gradient(100deg, #e3f2fd 0%, #bbdefb 70%); /* Очень нежный светло-синий градиент */
+	    padding: 5px;            /* Пространство внутри синего фона вокруг кнопок */
+	    margin-top: 5px;         /* Отступ от полей ввода сверху */
+	    border-radius: 8px;      /* Скругленные углы у самого фона */
+	    display: flex;            /* Чтобы кнопки внутри красиво встали */
+	    justify-content: center;  /* Центрируем кнопки внутри фона */
+	    border: 1px solid #90caf9; /* Тонкая синяя рамка, чтобы фон был четче */
+}
+
+</style>
+</head>
+<body class="container">
+<form class="card" action="{% url 'articles:login' %}" method="post">
+
+	{% csrf_token %}
+	<div class="form-group">
+	{% if form.non_field_errors %}
+	  <div class="error-message">
+	    {% for error in form.non_field_errors %}
+	      <h4>{{ error }}</h4>
+	    {% endfor %}
+	  </div>
+	{% endif %}
+		<label class="small mb-1" for="{{ form.username.id_for_label }}">Имя пользователя</label>
+		<br>{{ form.username }}
+	</div>
+	<br>
+	<div class="form-group">
+    	<label class="small mb-1" for="{{ form.password.id_for_label}}">
+    		Пароль<br>
+    	</label>
+   	 {{ form.password}}
+
+	</div>
+	<div class="form-group ">
+            <input class="button" type="submit" value="Авторизоваться">
+            <p><a href="/" class="button">назад</a></p>
+
+
+    </div>
+    <div class="form-group">
+        <a href="#">
+        	<i class="fab fa-google fa-2x" style="color: #d9503e;"></i>
+        </a>
+        <a href="#">
+			<i class="fab fa-vk fa-2x" style="color: #4a658b;"></i>
+        </a>
+        <a href="#">
+        	<i class="fab fa-github fa-2x" style="color: #303030;"></i>
+        </a>
+        <a href="#">
+            <i class="fab fa-facebook fa-2x" style="color: #405794;"></i>
+        </a>
+    </div>
+	
+
+</form>
+</body>
